@@ -79,7 +79,11 @@
             <div class="field"><label for="location">Location</label><input id="location" type="text" placeholder="City, Country"></div>
           </div>
           <div class="field"><label for="details">Mission details</label><textarea id="details" rows="4" placeholder="Tell us about your site, deadline and deliverable"></textarea></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;">Send Request</button>
+          <button type="submit" class="btn btn-primary" id="quote-submit-btn" style="width:100%;">Send Request</button>
+          <div id="quote-success" class="form-success" role="status" aria-live="polite" style="display:none;align-items:center;gap:10px;margin-top:14px;padding:14px 16px;border-radius:10px;background:rgba(20,80,62,0.08);border:1px solid rgba(20,80,62,0.25);color:#14503E;font-size:0.95rem;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+            <span>Message sent successfully — we'll get back to you within 4 hours.</span>
+          </div>
         </form>
       </div>
       <div class="reveal">
@@ -163,7 +167,7 @@
   <!-- 8. SERVICE AREA SPLIT -->
   <section class="container">
     <div class="split">
-      <div class="frame-signal reveal-left"><div class="photo"><img src="https://images.unsplash.com/photo-1489558546780-a69e0b3293e1?w=1200&q=55&fm=webp&fit=crop&auto=format" alt="Drone silhouette against a sunset sky representing Stackly's signal coverage" width="1200" height="1000"></div></div>
+      <div class="frame-signal reveal-left"><div class="photo"><img src="https://wsrv.nl/?url=https://images.unsplash.com/photo-1489558546780-a69e0b3293e1&w=900&h=750&fit=cover&output=webp&q=45" alt="Drone silhouette against a sunset sky representing Stackly's signal coverage" width="1200" height="1000"></div></div>
       <div class="reveal-right">
         <span class="eyebrow">Service area</span>
         <h2 style="margin-top:14px;">Local pilots, wherever your site is.</h2>
@@ -258,6 +262,39 @@
     </div>
   </footer>
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var quoteForm = document.getElementById('quote-form');
+      if (!quoteForm) return;
+      var successBox = document.getElementById('quote-success');
+      var submitBtn = document.getElementById('quote-submit-btn');
+
+      quoteForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!quoteForm.checkValidity()) {
+          quoteForm.reportValidity();
+          return;
+        }
+
+        // Simulate sending, then show success state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        setTimeout(function () {
+          quoteForm.reset();
+          submitBtn.textContent = 'Send Request';
+          submitBtn.disabled = false;
+          successBox.style.display = 'flex';
+
+          // Auto-hide after a few seconds
+          clearTimeout(successBox._hideTimer);
+          successBox._hideTimer = setTimeout(function () {
+            successBox.style.display = 'none';
+          }, 6000);
+        }, 600);
+      });
+    })();
+  </script>
 
 </body>
 </html>

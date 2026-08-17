@@ -70,11 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.faq-item').forEach(item => {
     const q = item.querySelector('.faq-q');
     const a = item.querySelector('.faq-a');
+    if (!q || !a) return;
     q.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(o => {
         o.classList.remove('open');
-        o.querySelector('.faq-a').style.maxHeight = null;
+        const oa = o.querySelector('.faq-a');
+        if (oa) oa.style.maxHeight = null;
       });
       if (!isOpen) {
         item.classList.add('open');
@@ -83,12 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Header shadow on scroll
+  // Header shadow on scroll (only on pages that have the marketing site header)
   const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 8) header.style.boxShadow = '0 8px 24px -18px rgba(20,80,62,.4)';
-    else header.style.boxShadow = 'none';
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 8) header.style.boxShadow = '0 8px 24px -18px rgba(20,80,62,.4)';
+      else header.style.boxShadow = 'none';
+    });
+  }
 
   // Contact form (demo only, no backend)
   const form = document.querySelector('#quote-form');

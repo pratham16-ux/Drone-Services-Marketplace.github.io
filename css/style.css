@@ -30,7 +30,10 @@ body{
   font-family:'Inter',sans-serif;
   -webkit-font-smoothing:antialiased;
   overflow-x:clip;
+  padding-top:84px; /* offset for fixed header */
 }
+@media (max-width:960px){ body{ padding-top:74px; } }
+@media (max-width:768px){ body{ padding-top:68px; } }
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 h1,h2,h3,h4{font-family:'Fraunces',serif;margin:0;line-height:1.08;color:var(--ink);font-weight:600;}
@@ -63,7 +66,7 @@ section{padding:var(--sp-8) 0;position:relative;}
 
 /* ---------- Header ---------- */
 .site-header{
-  position:sticky;top:0;z-index:1000;
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
   background:rgba(246,243,236,.82);backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
   isolation:isolate;
