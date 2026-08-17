@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Stackly</title>
+<meta name="description" content="The page you're looking for doesn't exist.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .error-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:48px 20px;text-align:center;}
+  .error-logo{display:flex;align-items:center;justify-content:center;margin-bottom:36px;}
+  .error-logo img{
+    height:40px;width:auto;
+    filter:brightness(0) saturate(100%) invert(20%) sepia(24%) saturate(1580%) hue-rotate(115deg) brightness(94%) contrast(93%);
+  }
+  .error-code{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(4rem,14vw,7.5rem);
+    color:var(--primary);line-height:1;letter-spacing:-.02em;}
+  .error-icon{font-size:2.4rem;margin-bottom:6px;}
+  .error-wrap h1{font-size:1.6rem;margin-top:14px;}
+  .error-wrap p{margin-top:10px;font-size:.96rem;color:var(--ink-soft);max-width:440px;}
+  .error-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
+  .error-links{margin-top:34px;font-size:.86rem;color:var(--ink-soft);}
+  .error-links a{color:var(--primary-2);font-weight:600;}
+  .error-links a:hover{text-decoration:underline;}
+  .error-links span{margin:0 8px;opacity:.5;}
+</style>
+</head>
+<body>
+
+  <main class="error-wrap">
+    <a href="index.html" class="error-logo">
+      <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly — Drone Services Marketplace">
+    </a>
+
+    <div class="error-icon">🛰️</div>
+    <div class="error-code">404</div>
+    <h1>Lost signal</h1>
+    <p>We couldn't find the page you were looking for. It may have been moved, renamed, or never existed.</p>
+
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-primary">Back to Home</a>
+      <a href="contact.html" class="btn btn-ghost">Contact Support</a>
+    </div>
+
+    <div class="error-links">
+      <a href="services.html">Services</a><span>·</span>
+      <a href="login.html">Sign In</a><span>·</span>
+      <a href="signup.html">Create Account</a><span>·</span>
+      <a href="become-a-pilot.html">Become a Pilot</a>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>

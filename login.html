@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — Stackly</title>
+<meta name="description" content="Sign in to Stackly as a client or a pilot to access your dashboard.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .auth-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px;}
+  .auth-logo{display:flex;align-items:center;justify-content:center;margin-bottom:28px;}
+  .auth-logo img{
+    height:44px;width:auto;
+    filter:brightness(0) saturate(100%) invert(20%) sepia(24%) saturate(1580%) hue-rotate(115deg) brightness(94%) contrast(93%);
+  }
+  .auth-card{width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:40px 36px;}
+  .auth-head{text-align:center;margin-bottom:28px;}
+  .auth-head h1{font-size:1.6rem;margin-top:10px;}
+  .auth-head p{margin-top:8px;font-size:.94rem;}
+
+  .role-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--surface-2);border-radius:999px;padding:5px;margin-bottom:26px;}
+  .role-btn{border:none;background:transparent;padding:11px 10px;border-radius:999px;font-weight:700;font-size:.88rem;
+    color:var(--ink-soft);cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease);}
+  .role-btn.active{background:var(--primary);color:#fff;box-shadow:0 10px 20px -10px rgba(20,80,62,.55);}
+
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  .field input{width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;
+    font-family:inherit;font-size:.94rem;background:var(--surface);color:var(--ink);}
+  .field input:focus{outline:2px solid var(--primary-2);outline-offset:1px;}
+  .field-error{display:none;color:#b3392c;font-size:.78rem;margin-top:6px;}
+  .field.invalid input{border-color:#b3392c;}
+  .field.invalid .field-error{display:block;}
+
+  .auth-row{display:flex;align-items:center;justify-content:space-between;margin:4px 0 22px;font-size:.82rem;}
+  .auth-row a{color:var(--primary-2);font-weight:600;}
+  .auth-row a:hover{text-decoration:underline;}
+  .check-row{display:flex;align-items:center;gap:8px;color:var(--ink-soft);}
+  .check-row input{width:16px;height:16px;accent-color:var(--primary);}
+
+  .auth-submit{width:100%;}
+  .auth-foot{text-align:center;margin-top:22px;font-size:.88rem;color:var(--ink-soft);}
+  .auth-foot a{color:var(--primary-2);font-weight:700;}
+  .auth-foot a:hover{text-decoration:underline;}
+
+  .demo-note{margin-top:18px;text-align:center;font-size:.76rem;color:var(--ink-soft);opacity:.8;}
+</style>
+</head>
+<body>
+
+  <main class="auth-wrap">
+    <a href="index.html" class="auth-logo">
+      <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly — Drone Services Marketplace">
+    </a>
+    <div class="auth-card">
+      <div class="auth-head">
+        <span class="eyebrow" style="justify-content:center;">Welcome back</span>
+        <h1>Sign in to Stackly</h1>
+        <p>Choose your account type to continue.</p>
+      </div>
+
+      <div class="role-toggle" role="tablist" aria-label="Account type">
+        <button type="button" class="role-btn active" id="role-client" role="tab" aria-selected="true">I'm a Client</button>
+        <button type="button" class="role-btn" id="role-pilot" role="tab" aria-selected="false">I'm a Pilot</button>
+      </div>
+
+      <form id="login-form" novalidate>
+        <div class="field" id="field-email">
+          <label for="email">Email address</label>
+          <input id="email" type="email" placeholder="you@company.com" required>
+          <span class="field-error">Please enter a valid email address.</span>
+        </div>
+        <div class="field" id="field-password">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" required minlength="4">
+          <span class="field-error">Password must be at least 4 characters.</span>
+        </div>
+        <div class="auth-row">
+          <label class="check-row"><input type="checkbox" id="remember">Remember me</label>
+          <a href="404.html">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary auth-submit" id="submit-btn">Sign In as Client</button>
+      </form>
+
+      <p class="auth-foot">Don't have an account? <a href="signup.html">Create one</a></p>
+      <p class="demo-note">Demo login — any email &amp; password (4+ characters) will work.</p>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function(){
+      const roleClient = document.getElementById('role-client');
+      const rolePilot = document.getElementById('role-pilot');
+      const submitBtn = document.getElementById('submit-btn');
+      let role = 'client';
+
+      function setRole(r){
+        role = r;
+        if(r === 'client'){
+          roleClient.classList.add('active'); roleClient.setAttribute('aria-selected','true');
+          rolePilot.classList.remove('active'); rolePilot.setAttribute('aria-selected','false');
+          submitBtn.textContent = 'Sign In as Client';
+        } else {
+          rolePilot.classList.add('active'); rolePilot.setAttribute('aria-selected','true');
+          roleClient.classList.remove('active'); roleClient.setAttribute('aria-selected','false');
+          submitBtn.textContent = 'Sign In as Pilot';
+        }
+      }
+      roleClient.addEventListener('click', () => setRole('client'));
+      rolePilot.addEventListener('click', () => setRole('pilot'));
+
+      const form = document.getElementById('login-form');
+      const emailField = document.getElementById('field-email');
+      const passwordField = document.getElementById('field-password');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        let valid = true;
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+        if(!emailOk){ emailField.classList.add('invalid'); valid = false; } else { emailField.classList.remove('invalid'); }
+        const passOk = passwordInput.value.trim().length >= 4;
+        if(!passOk){ passwordField.classList.add('invalid'); valid = false; } else { passwordField.classList.remove('invalid'); }
+        if(!valid) return;
+
+        try{
+          localStorage.setItem('stackly_email', emailInput.value.trim());
+          localStorage.setItem('stackly_role', role);
+        }catch(err){}
+
+        submitBtn.textContent = 'Signing in…';
+        submitBtn.style.opacity = '.7';
+        setTimeout(() => {
+          window.location.href = role === 'client' ? 'client-dashboard.html' : 'pilot-dashboard.html';
+        }, 500);
+      });
+    })();
+  </script>
+
+</body>
+</html>
